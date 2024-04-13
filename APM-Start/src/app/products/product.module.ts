@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductDetailGuard } from './product-detail.guard';
-import { ToastrModule } from 'ngx-toastr';
-
+//import { ToastrModule } from 'ngx-toastr';
+import 'tslib';
 @NgModule({
   declarations: [ProductDetailsComponent,
     ProductListComponent,
@@ -19,7 +19,6 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule,
     RouterModule.forChild([{path: 'products',component: ProductListComponent},
     {path: 'product/:id',
     canActivate:[ProductDetailGuard] ,
