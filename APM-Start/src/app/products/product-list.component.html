@@ -1,0 +1,59 @@
+{{title}}
+<div class="card">
+    <div class="card-header">
+        <p>Product List</p>
+    </div>
+<div class="card-body">
+    <div class="col-md-2">Filter By</div>
+    <div class="col-md-4">
+        <input type="text" [(ngModel)]='listFilter' />
+         
+    </div>
+ 
+</div>
+
+<div class="row">
+    <div class="col-md-6"> <h4>Filtered by: {{ listFilter}}</h4></div>
+</div>
+<div class="table-responsive">
+    <table class="table" *ngIf="products.length">
+        <thead>
+            <tr>
+                <th>
+                    <button class="btn btn-primary"
+                    (click)='toggleImg()'> {{showImg? 'Hide ' : 'Show '}}Image</button>
+                    
+                </th>
+            <th>Product</th>
+            <th>Code</th>
+            <th>Available</th>
+            <th>Price</th>
+            <th>5 Star Rating</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr *ngFor="let product of filteredProducts">
+                <td> <img  *ngIf='showImg'
+                    [src]="product.imageUrl"
+                    [title]="product.productName "
+                    [style.width.px]="imgWidth"
+                    [style.margin.px]="imgMargin"></td>
+              
+                <td>
+                     <a [routerLink]="['/product',product.productId]">{{product.productName}}</a> 
+                </td> 
+                <td>{{product.productCode | lowercase | convertToSpace:'-'}}</td>
+                <td>{{product.releaseDate}}</td>
+                <td>{{product.price |  currency:'RM':'symbol':'1.2-2'}}</td>
+                <td><pm-star [rating]="product.starRating" 
+                 (RatingClicked)="onRatingClicked($event)"></pm-star></td> <!-- Rating clicked is output event defined in star-->
+            </tr>                                                           <!-- onRatingClicked is function to handle that event product-list.ts -->                
+
+            
+        </tbody>
+
+    </table>
+</div>
+
+</div>
